@@ -9,5 +9,11 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "@apollo/client": "^4.2.3",
+    "@apollo/server": "^5.5.1",
+    "cross-fetch": "^4.1.0",
+    "graphql": "^16.14.2"
+  }
 }
