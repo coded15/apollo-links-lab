@@ -1,49 +1,28 @@
-/**
- * server.js — A minimal Apollo Server
- *
- * PURPOSE: This gives your Apollo Client (with Links) something to talk to.
- * It defines a simple schema with a "hello" query and a "books" query
- * so you can test different Link behaviors.
- *
- * Run with: npm run server
- */
-
-import { ApolloServer } from "@apollo/server";
-import { startStandaloneServer } from "@apollo/server/standalone";
-
-// --- SCHEMA ---
-// This defines what queries the server supports.
+import {ApolloServer} from '@apollo/server';
+import { startStandaloneServer } from '@apollo/server/standalone';
 const typeDefs = `#graphql
-  type Book {
-    title: String
-    author: String
-  }
 
-  type Query {
-    hello: String
-    books: [Book]
-  }
+    type Book{
+        title: String
+        author: String
+    }
+    type Query{
+        hello: String
+        books: [Book]
+    }
+
 `;
+const resolvers = 
+{
+    Query:{
+        hello: ()=> "Hello from Ichchha's apollo server",
+        books: () => [
+            {title: "After Dark", author: "Haruki Murakami"}, {title: "What I talk about, when I talk about running", author: "Haruki Murakami"}, {title: "7 husbands of Evelyn Hugo", author:""}
+        ]
+    }
+}
+const server = new ApolloServer({typeDefs, resolvers});
 
-// --- RESOLVERS ---
-// These are the functions that run when a query is made.
-const resolvers = {
-  Query: {
-    hello: () => "Hello from Apollo Server!",
-    books: () => [
-      { title: "The Great Gatsby", author: "F. Scott Fitzgerald" },
-      { title: "1984", author: "George Orwell" },
-      { title: "Dune", author: "Frank Herbert" },
-    ],
-  },
-};
-
-// --- START SERVER ---
-const server = new ApolloServer({ typeDefs, resolvers });
-
-const { url } = await startStandaloneServer(server, {
-  listen: { port: 4000 },
-});
-
-console.log(`🚀 Server ready at ${url}`);
-console.log(`   Try running: npm run client`);
+const {url} = await startStandaloneServer(server, {listen: {port: 4000}});
+console.log(`Server running at url: ${url}`);
+console.log(`Try running: npm run client`);
