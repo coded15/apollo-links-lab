@@ -1,0 +1,13 @@
+{
+  "name": "apollo-links-lab",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "A lab to explore Apollo Links",
+  "scripts": {
+    "server": "node server.js",
+    "client": "node client.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
